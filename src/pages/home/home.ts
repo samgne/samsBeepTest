@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-//import { Observable,Subscription } from 'rxjs/Rx';
+import { Insomnia } from '@ionic-native/insomnia';
 
 const LEVELS: Level[] = [
   { id: 1, time: 9000, shuttles: 7 },
@@ -32,6 +32,7 @@ const LEVELS: Level[] = [
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
   public shuttleStart: Date;
@@ -39,8 +40,9 @@ export class HomePage {
   public currentShuttle: number = 0;
   public timeElapsed: number;
   public timer;
-  public interval;
-  constructor(public navCtrl: NavController) {
+  public interval;  
+
+  constructor(private insomnia: Insomnia, public navCtrl: NavController) {
     
   }
 
@@ -54,8 +56,7 @@ export class HomePage {
  
     this.createTimer();
     this.runLevel();
-    
-    
+    this.insomnia.keepAwake();
   }
 
   runLevel() {

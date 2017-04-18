@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { Insomnia } from '@ionic-native/insomnia';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HomePage } from '../pages/home/home';
   ],
   providers: [
     StatusBar,
+    Insomnia,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

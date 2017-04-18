@@ -7,13 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-    <h3> Level {{ currentLevel }}, Shuttle {{ currentShuttle }} </h2>
+    <h3> Level {{ currentLevel }}, Shuttle {{ currentShuttle }} </h3>
     <p>
       {{ timer }}
     </p>
   <ion-fab center bottom>
-    <button ion-button (click)="start()">Start</button>
-    <button ion-button color="danger" (click)="stop()">Stop</button>
+    <button ion-fab (click)="start()">Start</button>
+    <button ion-fab color="danger" (click)="stop()">Stop</button>
   </ion-fab>
   
 </ion-content>
