@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 
 import { Insomnia } from '@ionic-native/insomnia';
 
+import { NativeAudio } from '@ionic-native/native-audio';
+
 const LEVELS: Level[] = [
   { id: 1, time: 9000, shuttles: 7 },
   { id: 2, time: 8000, shuttles: 8 },
@@ -42,7 +44,7 @@ export class HomePage {
   public timer;
   public interval;  
 
-  constructor(private insomnia: Insomnia, public navCtrl: NavController) {
+  constructor(private nativeAudio: NativeAudio, private insomnia: Insomnia, public navCtrl: NavController) {
     
   }
 
@@ -50,6 +52,7 @@ export class HomePage {
 
   stop() {
     clearInterval(this.interval);
+    this.insomnia.allowSleepAgain();
   }
 
   start() {
@@ -57,6 +60,7 @@ export class HomePage {
     this.createTimer();
     this.runLevel();
     this.insomnia.keepAwake();
+    this.nativeAudio.preloadSimple('beep', 'assets/audio/beep.mp3');
   }
 
   runLevel() {
@@ -72,6 +76,7 @@ export class HomePage {
     this.shuttleStart.setMilliseconds(this.shuttleStart.getMilliseconds() + this.levels[this.currentLevel].time);
     console.log("Shuttle start: " + this.shuttleStart);
     this.timeElapsed = 0;
+    
     
   }
 
@@ -93,6 +98,8 @@ export class HomePage {
       console.log("shuttle done");
       this.currentShuttle = this.currentShuttle + 1;
       console.log("Current shuttle: " + this.currentShuttle);
+      this.nativeAudio.play('beep', () => console.log('beep is done playing'));
+      console.log(this.nativeAudio);
       this.createTimer();
     }
 
